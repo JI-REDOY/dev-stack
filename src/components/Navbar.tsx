@@ -62,9 +62,7 @@ const Navbar = () => {
 
   return (
     <nav className="fixed top-0 left-0 z-50 w-full border-b border-slate-200/70 bg-white/90 backdrop-blur-xl">
-
       <div className="grid h-16 grid-cols-3 items-center px-4 md:hidden">
-
         <div className="flex justify-start">
           <button
             onClick={() => setMenuOpen(!menuOpen)}
@@ -89,10 +87,7 @@ const Navbar = () => {
           </a>
         </div>
 
-        {/* RIGHT — Sign In + Sign Up (swap) */}
         <div className="flex items-center justify-end gap-1.5">
-
-          {/* Mobile Sign In */}
           <button
             onClick={() => setActiveButton("signin")}
             className={`rounded-full px-2.5 py-1.5 text-[10px] font-semibold transition-all duration-300 ${
@@ -104,7 +99,6 @@ const Navbar = () => {
             Sign In
           </button>
 
-          {/* Mobile Sign Up */}
           <button
             onClick={() => setActiveButton("signup")}
             className={`rounded-full px-2.5 py-1.5 text-[10px] font-semibold transition-all duration-300 ${
@@ -118,15 +112,11 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* ========== DESKTOP HEADER ========== */}
       <div className="mx-auto hidden h-16 max-w-7xl items-center justify-between px-8 md:flex">
-
-        {/* Logo (বামে) */}
         <a href="#home" className="flex shrink-0 items-center">
           <img src={LOGO_SRC} alt="Dev Stack" className="h-8 w-auto object-contain" />
         </a>
 
-        {/* Menu (মাঝে) */}
         <div className="flex items-center gap-7">
           {navLinks.map((link) => {
             const isActive = activeSection === link.href.replace("#", "");
@@ -147,10 +137,7 @@ const Navbar = () => {
           })}
         </div>
 
-        {/* Buttons (ডানে) — Color Swap */}
         <div className="flex items-center gap-3">
-
-          {/* Desktop Sign In */}
           <button
             onClick={() => setActiveButton("signin")}
             className={`rounded-full px-5 py-2 text-xs font-semibold transition-all duration-300 ${
@@ -162,7 +149,6 @@ const Navbar = () => {
             Sign In
           </button>
 
-          {/* Desktop Sign Up */}
           <button
             onClick={() => setActiveButton("signup")}
             className={`rounded-full px-5 py-2 text-xs font-semibold transition-all duration-300 ${
@@ -176,7 +162,6 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* ========== MOBILE MENU ========== */}
       {menuOpen && (
         <div className="border-t border-slate-100 bg-white px-5 py-4 shadow-lg md:hidden">
           <div className="flex flex-col gap-1">
