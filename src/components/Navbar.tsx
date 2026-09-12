@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-// ✅ একটাই logo src — Desktop + Mobile দুই জায়গায়
 const LOGO_SRC = "/src/assets/logo-text.png";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
+
+  // ✅ কোন button এ gradient থাকবে — default "signin"
+  const [activeButton, setActiveButton] = useState("signin");
 
   const navLinks = [
     { name: "Home", href: "#home" },
@@ -13,6 +16,51 @@ const Navbar = () => {
     { name: "About", href: "#about" },
     { name: "Contact", href: "#contact" },
   ];
+
+  // ✅ Scroll Spy
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + 100;
+      let currentSection = "home";
+
+      navLinks.forEach((link) => {
+        const id = link.href.replace("#", "");
+        const section = document.getElementById(id);
+
+        if (section) {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.offsetHeight;
+
+          if (
+            scrollPosition >= sectionTop &&
+            scrollPosition < sectionTop + sectionHeight
+          ) {
+            currentSection = id;
+          }
+        }
+      });
+
+      const isAtBottom =
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 10;
+
+      if (isAtBottom) {
+        const lastLink = navLinks[navLinks.length - 1];
+        currentSection = lastLink.href.replace("#", "");
+      }
+
+      setActiveSection(currentSection);
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
+  }, []);
 
   return (
     <nav className="fixed top-0 left-0 z-50 w-full border-b border-slate-200/70 bg-white/90 backdrop-blur-xl">
@@ -39,23 +87,37 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* CENTER — Logo (একই src) */}
+        {/* CENTER — Logo */}
         <div className="flex justify-center">
           <a href="#home" className="flex items-center">
-            <img
-              src={LOGO_SRC}
-              alt="Dev Stack"
-              className="h-7 w-auto object-contain"
-            />
+            <img src={LOGO_SRC} alt="Dev Stack" className="h-7 w-auto object-contain" />
           </a>
         </div>
 
-        {/* RIGHT — Sign In + Sign Up */}
+        {/* RIGHT — Sign In + Sign Up (swap) */}
         <div className="flex items-center justify-end gap-1.5">
-          <button className="text-[10px] font-medium text-slate-600">
+
+          {/* Mobile Sign In */}
+          <button
+            onClick={() => setActiveButton("signin")}
+            className={`rounded-full px-2.5 py-1.5 text-[10px] font-semibold transition-all duration-300 ${
+              activeButton === "signin"
+                ? "bg-linear-to-r from-orange-500 via-pink-500 to-violet-600 text-white shadow-md shadow-pink-500/30"
+                : "border border-slate-200 bg-white text-slate-600"
+            }`}
+          >
             Sign In
           </button>
-          <button className="rounded-full bg-linear-to-r from-orange-500 via-pink-500 to-violet-600 px-3 py-1.5 text-[10px] font-semibold text-white">
+
+          {/* Mobile Sign Up */}
+          <button
+            onClick={() => setActiveButton("signup")}
+            className={`rounded-full px-2.5 py-1.5 text-[10px] font-semibold transition-all duration-300 ${
+              activeButton === "signup"
+                ? "bg-linear-to-r from-orange-500 via-pink-500 to-violet-600 text-white shadow-md shadow-pink-500/30"
+                : "border border-slate-200 bg-white text-slate-600"
+            }`}
+          >
             Sign Up
           </button>
         </div>
@@ -64,39 +126,56 @@ const Navbar = () => {
       {/* ========== DESKTOP HEADER ========== */}
       <div className="mx-auto hidden h-16 max-w-7xl items-center justify-between px-8 md:flex">
 
-        {/* Logo (বামে — একই src) */}
+        {/* Logo (বামে) */}
         <a href="#home" className="flex shrink-0 items-center">
-          <img
-            src={LOGO_SRC}
-            alt="Dev Stack"
-            className="h-8 w-auto object-contain"
-          />
+          <img src={LOGO_SRC} alt="Dev Stack" className="h-8 w-auto object-contain" />
         </a>
 
         {/* Menu (মাঝে) */}
         <div className="flex items-center gap-7">
-          {navLinks.map((link, index) => (
-            <a
-              key={link.name}
-              href={link.href}
-              className={`relative text-xs font-medium transition ${
-                index === 0 ? "text-pink-600" : "text-slate-500 hover:text-slate-900"
-              }`}
-            >
-              {link.name}
-              {index === 0 && (
-                <span className="absolute -bottom-5 left-1/2 h-0.5 w-5 -translate-x-1/2 rounded-full bg-linear-to-r from-orange-500 via-pink-500 to-violet-600" />
-              )}
-            </a>
-          ))}
+          {navLinks.map((link) => {
+            const isActive = activeSection === link.href.replace("#", "");
+            return (
+              <a
+                key={link.name}
+                href={link.href}
+                className={`relative text-xs font-medium transition ${
+                  isActive ? "text-pink-600" : "text-slate-500 hover:text-slate-900"
+                }`}
+              >
+                {link.name}
+                {isActive && (
+                  <span className="absolute -bottom-6 left-1/2 h-0.5 w-5 -translate-x-1/2 rounded-full bg-linear-to-r from-orange-500 via-pink-500 to-violet-600" />
+                )}
+              </a>
+            );
+          })}
         </div>
 
-        {/* Buttons (ডানে) */}
+        {/* Buttons (ডানে) — Color Swap */}
         <div className="flex items-center gap-3">
-          <button className="px-2 py-2 text-xs font-medium text-slate-600 hover:text-slate-950">
+
+          {/* Desktop Sign In */}
+          <button
+            onClick={() => setActiveButton("signin")}
+            className={`rounded-full px-5 py-2 text-xs font-semibold transition-all duration-300 ${
+              activeButton === "signin"
+                ? "bg-linear-to-r from-orange-500 via-pink-500 to-violet-600 text-white shadow-md shadow-pink-500/30"
+                : "border border-slate-200 bg-white text-slate-600 hover:border-pink-200 hover:bg-pink-50 hover:text-pink-600"
+            }`}
+          >
             Sign In
           </button>
-          <button className="rounded-full bg-linear-to-r from-orange-500 via-pink-500 to-violet-600 px-5 py-2 text-xs font-semibold text-white shadow-md shadow-pink-500/20">
+
+          {/* Desktop Sign Up */}
+          <button
+            onClick={() => setActiveButton("signup")}
+            className={`rounded-full px-5 py-2 text-xs font-semibold transition-all duration-300 ${
+              activeButton === "signup"
+                ? "bg-linear-to-r from-orange-500 via-pink-500 to-violet-600 text-white shadow-md shadow-pink-500/30"
+                : "border border-slate-200 bg-white text-slate-600 hover:border-pink-200 hover:bg-pink-50 hover:text-pink-600"
+            }`}
+          >
             Sign Up
           </button>
         </div>
@@ -106,20 +185,23 @@ const Navbar = () => {
       {menuOpen && (
         <div className="border-t border-slate-100 bg-white px-5 py-4 shadow-lg md:hidden">
           <div className="flex flex-col gap-1">
-            {navLinks.map((link, index) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={() => setMenuOpen(false)}
-                className={`rounded-lg px-4 py-3 text-sm font-medium ${
-                  index === 0
-                    ? "bg-pink-50 text-pink-600"
-                    : "text-slate-600 hover:bg-slate-50"
-                }`}
-              >
-                {link.name}
-              </a>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = activeSection === link.href.replace("#", "");
+              return (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setMenuOpen(false)}
+                  className={`rounded-lg px-4 py-3 text-sm font-medium ${
+                    isActive
+                      ? "bg-pink-50 text-pink-600"
+                      : "text-slate-600 hover:bg-slate-50"
+                  }`}
+                >
+                  {link.name}
+                </a>
+              );
+            })}
           </div>
         </div>
       )}
