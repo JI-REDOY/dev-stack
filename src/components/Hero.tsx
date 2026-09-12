@@ -1,4 +1,5 @@
 import { BRAND_GRADIENT, BRAND_GRADIENT_TEXT } from "../theme/gradient";
+import bannerStack from "../assets/banner-stack.png";
 
 const Hero = () => {
     return (
@@ -7,6 +8,7 @@ const Hero = () => {
             className="overflow-hidden bg-white pt-24 pb-0 sm:pt-28 sm:pb-0 lg:pt-32 lg:pb-0"
         >
             <div className="mx-auto grid max-w-7xl items-center gap-2 px-5 sm:gap-4 sm:px-8 lg:grid-cols-2 lg:gap-6 lg:px-10">
+
                 <div className="text-center lg:text-left">
                     <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-pink-100 bg-pink-50 px-3 py-1.5">
                         <span className={`h-1.5 w-1.5 rounded-full ${BRAND_GRADIENT}`}></span>
@@ -49,7 +51,7 @@ const Hero = () => {
                     <div className="absolute left-1/2 top-1/2 -z-10 h-48 w-48 -translate-x-1/2 -translate-y-1/2 rounded-full bg-pink-100/60 blur-3xl sm:h-64 sm:w-64 lg:h-80 lg:w-80"></div>
 
                     <img
-                        src="./src/assets/banner-stack.png"
+                        src={bannerStack}  
                         alt="Development Stack"
                         className="relative z-10 w-full max-w-[18rem] object-contain drop-shadow-xl sm:max-w-sm lg:max-w-lg xl:max-w-xl"
                     />
