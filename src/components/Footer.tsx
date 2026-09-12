@@ -1,4 +1,3 @@
-import { BRAND_GRADIENT_TEXT } from "../theme/gradient";
 import logoText from "../assets/logo-text.png";
 
 const Footer = () => {
