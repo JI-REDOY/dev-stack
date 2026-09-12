@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { BRAND_GRADIENT } from "../theme/gradient";
-
-const LOGO_SRC = "/src/assets/logo-text.png";
+import logoText from "../assets/logo-text.png"; 
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -24,15 +23,10 @@ const Navbar = () => {
       navLinks.forEach((link) => {
         const id = link.href.replace("#", "");
         const section = document.getElementById(id);
-
         if (section) {
           const sectionTop = section.offsetTop;
           const sectionHeight = section.offsetHeight;
-
-          if (
-            scrollPosition >= sectionTop &&
-            scrollPosition < sectionTop + sectionHeight
-          ) {
+          if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
             currentSection = id;
           }
         }
@@ -62,6 +56,7 @@ const Navbar = () => {
 
   return (
     <nav className="fixed top-0 left-0 z-50 w-full border-b border-slate-200/70 bg-white/90 backdrop-blur-xl">
+
       <div className="grid h-16 grid-cols-3 items-center px-4 md:hidden">
         <div className="flex justify-start">
           <button
@@ -83,7 +78,7 @@ const Navbar = () => {
 
         <div className="flex justify-center">
           <a href="#home" className="flex items-center">
-            <img src={LOGO_SRC} alt="Dev Stack" className="h-7 w-auto object-contain" />
+            <img src={logoText} alt="Dev Stack" className="h-7 w-auto object-contain" />
           </a>
         </div>
 
@@ -114,7 +109,7 @@ const Navbar = () => {
 
       <div className="mx-auto hidden h-16 max-w-7xl items-center justify-between px-8 md:flex">
         <a href="#home" className="flex shrink-0 items-center">
-          <img src={LOGO_SRC} alt="Dev Stack" className="h-8 w-auto object-contain" />
+          <img src={logoText} alt="Dev Stack" className="h-8 w-auto object-contain" />
         </a>
 
         <div className="flex items-center gap-7">
@@ -161,6 +156,7 @@ const Navbar = () => {
           </button>
         </div>
       </div>
+
 
       {menuOpen && (
         <div className="border-t border-slate-100 bg-white px-5 py-4 shadow-lg md:hidden">

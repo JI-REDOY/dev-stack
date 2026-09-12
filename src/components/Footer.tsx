@@ -1,4 +1,5 @@
-const LOGO_SRC = "/src/assets/logo-text.png";
+import { BRAND_GRADIENT_TEXT } from "../theme/gradient";
+import logoText from "../assets/logo-text.png";
 
 const Footer = () => {
   const footerLinks = {
@@ -27,17 +28,15 @@ const Footer = () => {
   return (
     <footer className="border-t border-slate-200 bg-white">
       <div className="mx-auto max-w-7xl px-5 py-10 sm:px-8 lg:px-10 lg:py-14">
+
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-8">
+
           <div className="flex flex-col items-center text-center lg:col-span-5 lg:items-start lg:text-left">
             <a href="#home" className="flex items-center">
-              <img
-                src={LOGO_SRC}
-                alt="Dev Stack"
-                className="h-7 w-auto object-contain sm:h-8"
-              />
+              <img src={logoText} alt="Dev Stack" className="h-7 w-auto object-contain sm:h-8" />
             </a>
 
-            <p className="mt-4 max-w-xs text-xs leading-6 text-slate-500 sm:max-w-sm">
+            <p className="mt-3 max-w-xs text-xs leading-6 text-slate-500 sm:max-w-sm">
               Curated tools, technologies, and resources for developers
               building modern software.
             </p>
@@ -92,16 +91,10 @@ const Footer = () => {
             </p>
 
             <div className="flex items-center gap-5">
-              <a
-                href="#privacy"
-                className="text-[11px] text-slate-400 transition hover:text-pink-600"
-              >
+              <a href="#privacy" className="text-[11px] text-slate-400 transition hover:text-pink-600">
                 Privacy
               </a>
-              <a
-                href="#terms"
-                className="text-[11px] text-slate-400 transition hover:text-pink-600"
-              >
+              <a href="#terms" className="text-[11px] text-slate-400 transition hover:text-pink-600">
                 Terms
               </a>
             </div>

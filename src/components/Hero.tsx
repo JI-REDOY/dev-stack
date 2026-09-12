@@ -51,7 +51,7 @@ const Hero = () => {
                     <div className="absolute left-1/2 top-1/2 -z-10 h-48 w-48 -translate-x-1/2 -translate-y-1/2 rounded-full bg-pink-100/60 blur-3xl sm:h-64 sm:w-64 lg:h-80 lg:w-80"></div>
 
                     <img
-                        src={bannerStack}  
+                        src={bannerStack}
                         alt="Development Stack"
                         className="relative z-10 w-full max-w-[18rem] object-contain drop-shadow-xl sm:max-w-sm lg:max-w-lg xl:max-w-xl"
                     />
