@@ -214,36 +214,6 @@ That's the cycle — data down, events up.
 
 ---
 
-## 🚀 How to run this project
-
-```bash
-# Clone the repo
-git clone https://github.com/JI-REDOY/dev-stack.git
-
-# Go inside
-cd dev-stack
-
-# Install packages
-npm install
-
-# Start the dev server
-npm run dev
-```
-
-Then open [http://localhost:5173](http://localhost:5173).
-
----
-
-## 📦 Build for production
-
-```bash
-npm run build
-```
-
-Files go into the `dist` folder. Then you deploy that folder.
-
----
-
 ## 📁 Project structure
 
 ```
