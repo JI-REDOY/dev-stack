@@ -1,3 +1,5 @@
+import { BRAND_GRADIENT, BRAND_GRADIENT_TEXT } from "../theme/gradient";
+
 const Hero = () => {
     return (
         <section
@@ -9,7 +11,7 @@ const Hero = () => {
                 {/* Hero Content */}
                 <div className="text-center lg:text-left">
                     <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-pink-100 bg-pink-50 px-3 py-1.5">
-                        <span className="h-1.5 w-1.5 rounded-full bg-linear-to-r from-orange-500 via-pink-500 to-violet-600"></span>
+                        <span className={`h-1.5 w-1.5 rounded-full ${BRAND_GRADIENT}`}></span>
                         <span className="text-[11px] font-semibold text-pink-600">
                             Build. Explore. Create.
                         </span>
@@ -18,7 +20,7 @@ const Hero = () => {
                     <h1 className="text-3xl font-extrabold leading-[1.12] tracking-tight text-slate-900 sm:text-4xl lg:text-5xl xl:text-6xl">
                         Build Your Ideal
                         <br />
-                        <span className="bg-linear-to-r from-orange-500 via-pink-500 to-violet-600 bg-clip-text text-transparent">
+                        <span className={BRAND_GRADIENT_TEXT}>
                             Development Stack
                         </span>
                     </h1>
@@ -32,7 +34,7 @@ const Hero = () => {
                     <div className="mt-7 flex flex-col items-center gap-3 sm:flex-row sm:justify-center lg:justify-start">
                         <a
                             href="#technologies"
-                            className="w-full rounded-full bg-linear-to-r from-orange-500 via-pink-500 to-violet-600 px-6 py-3 text-center text-xs font-semibold text-white shadow-lg shadow-pink-500/20 transition duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-pink-500/30 sm:w-auto"
+                            className={`w-full rounded-full ${BRAND_GRADIENT} px-6 py-3 text-center text-xs font-semibold text-white shadow-lg shadow-pink-500/20 transition duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-pink-500/30 sm:w-auto`}
                         >
                             Explore Technologies
                         </a>

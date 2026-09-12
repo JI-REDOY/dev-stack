@@ -1,5 +1,6 @@
 import { toast } from "react-toastify";
 import type { Technology } from "../../Types/Technology";
+import { BRAND_GRADIENT } from "../../theme/gradient";
 
 interface TechnologyCardProps {
   technology: Technology;
@@ -24,7 +25,9 @@ const TechnologyCard = ({
 
   // Warning when user tries to add an already added technology
   const handleAlreadyAdded = () => {
-    toast.warning(`${name} is already in your stack!`);
+    toast.warning(`${name} is already in your stack!`, {
+      toastId: `dup-card-${technology.id}`,
+    });
   };
 
   return (
@@ -115,7 +118,7 @@ const TechnologyCard = ({
           className={`w-full rounded-xl py-2.5 text-xs font-semibold shadow-sm transition duration-200 ${
             isAdded
               ? "cursor-not-allowed bg-slate-300 text-slate-500"
-              : "bg-linear-to-r from-orange-500 via-pink-500 to-violet-600 text-white hover:-translate-y-0.5 hover:shadow-md"
+              : `${BRAND_GRADIENT} text-white hover:-translate-y-0.5 hover:shadow-md`
           }`}
         >
           {isAdded ? "✓ Added to Stack" : "Add to Stack"}

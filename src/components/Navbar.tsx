@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react";
+import { BRAND_GRADIENT } from "../theme/gradient";
 
 const LOGO_SRC = "/src/assets/logo-text.png";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
-
-  // ✅ কোন button এ gradient থাকবে — default "signin"
   const [activeButton, setActiveButton] = useState("signin");
 
   const navLinks = [
@@ -17,7 +16,6 @@ const Navbar = () => {
     { name: "Contact", href: "#contact" },
   ];
 
-  // ✅ Scroll Spy
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY + 100;
@@ -65,10 +63,8 @@ const Navbar = () => {
   return (
     <nav className="fixed top-0 left-0 z-50 w-full border-b border-slate-200/70 bg-white/90 backdrop-blur-xl">
 
-      {/* ========== MOBILE HEADER ========== */}
       <div className="grid h-16 grid-cols-3 items-center px-4 md:hidden">
 
-        {/* LEFT — Hamburger */}
         <div className="flex justify-start">
           <button
             onClick={() => setMenuOpen(!menuOpen)}
@@ -87,7 +83,6 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* CENTER — Logo */}
         <div className="flex justify-center">
           <a href="#home" className="flex items-center">
             <img src={LOGO_SRC} alt="Dev Stack" className="h-7 w-auto object-contain" />
@@ -102,7 +97,7 @@ const Navbar = () => {
             onClick={() => setActiveButton("signin")}
             className={`rounded-full px-2.5 py-1.5 text-[10px] font-semibold transition-all duration-300 ${
               activeButton === "signin"
-                ? "bg-linear-to-r from-orange-500 via-pink-500 to-violet-600 text-white shadow-md shadow-pink-500/30"
+                ? `${BRAND_GRADIENT} text-white shadow-md shadow-pink-500/30`
                 : "border border-slate-200 bg-white text-slate-600"
             }`}
           >
@@ -114,7 +109,7 @@ const Navbar = () => {
             onClick={() => setActiveButton("signup")}
             className={`rounded-full px-2.5 py-1.5 text-[10px] font-semibold transition-all duration-300 ${
               activeButton === "signup"
-                ? "bg-linear-to-r from-orange-500 via-pink-500 to-violet-600 text-white shadow-md shadow-pink-500/30"
+                ? `${BRAND_GRADIENT} text-white shadow-md shadow-pink-500/30`
                 : "border border-slate-200 bg-white text-slate-600"
             }`}
           >
@@ -145,7 +140,7 @@ const Navbar = () => {
               >
                 {link.name}
                 {isActive && (
-                  <span className="absolute -bottom-6 left-1/2 h-0.5 w-5 -translate-x-1/2 rounded-full bg-linear-to-r from-orange-500 via-pink-500 to-violet-600" />
+                  <span className={`absolute -bottom-6 left-1/2 h-0.5 w-5 -translate-x-1/2 rounded-full ${BRAND_GRADIENT}`} />
                 )}
               </a>
             );
@@ -160,7 +155,7 @@ const Navbar = () => {
             onClick={() => setActiveButton("signin")}
             className={`rounded-full px-5 py-2 text-xs font-semibold transition-all duration-300 ${
               activeButton === "signin"
-                ? "bg-linear-to-r from-orange-500 via-pink-500 to-violet-600 text-white shadow-md shadow-pink-500/30"
+                ? `${BRAND_GRADIENT} text-white shadow-md shadow-pink-500/30`
                 : "border border-slate-200 bg-white text-slate-600 hover:border-pink-200 hover:bg-pink-50 hover:text-pink-600"
             }`}
           >
@@ -172,7 +167,7 @@ const Navbar = () => {
             onClick={() => setActiveButton("signup")}
             className={`rounded-full px-5 py-2 text-xs font-semibold transition-all duration-300 ${
               activeButton === "signup"
-                ? "bg-linear-to-r from-orange-500 via-pink-500 to-violet-600 text-white shadow-md shadow-pink-500/30"
+                ? `${BRAND_GRADIENT} text-white shadow-md shadow-pink-500/30`
                 : "border border-slate-200 bg-white text-slate-600 hover:border-pink-200 hover:bg-pink-50 hover:text-pink-600"
             }`}
           >

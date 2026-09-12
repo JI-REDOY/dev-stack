@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 import type { Technology } from "../../Types/Technology";
 import TechnologyCard from "./TechnologyCard";
 import YourStack from "./YourStack";
+import { BRAND_GRADIENT_TEXT } from "../../theme/gradient";
 
 const Technologies = () => {
   const [technologies, setTechnologies] = useState<Technology[]>([]);
   const [selectedTechnologies, setSelectedTechnologies] = useState<
     Technology[]
   >([]);
-
   const [loading, setLoading] = useState(true);
 
   // Fetch technology data from local JSON file
@@ -29,24 +29,22 @@ const Technologies = () => {
 
   // Add technology to stack
   const handleAddToStack = (technology: Technology) => {
-    // Check if technology is already added
     const alreadyAdded = selectedTechnologies.some(
       (item) => item.id === technology.id
     );
 
     if (alreadyAdded) {
-      toast.warning(`${technology.name} is already in your stack!`);
+      toast.warning(`${technology.name} is already in your stack!`, {
+        toastId: `dup-${technology.id}`,
+      });
       return;
     }
 
-    // Add technology
-    setSelectedTechnologies((previous) => [
-      ...previous,
-      technology,
-    ]);
+    setSelectedTechnologies((previous) => [...previous, technology]);
 
-    // Success toast
-    toast.success(`${technology.name} added to your stack!`);
+    toast.success(`${technology.name} added to your stack!`, {
+      toastId: `add-${technology.id}`,
+    });
   };
 
   // Remove one technology
@@ -60,19 +58,26 @@ const Technologies = () => {
     );
 
     if (removedTechnology) {
-      toast.info(`${removedTechnology.name} removed from your stack.`);
+      toast.info(`${removedTechnology.name} removed from your stack.`, {
+        toastId: `remove-${id}`,
+      });
     }
   };
 
   // Remove all technologies
   const handleRemoveAll = () => {
     if (selectedTechnologies.length === 0) {
+      toast.info("Your stack is already empty.", {
+        toastId: "empty-stack",
+      });
       return;
     }
 
     setSelectedTechnologies([]);
 
-    toast.info("All technologies removed from your stack.");
+    toast.info("All technologies removed from your stack.", {
+      toastId: "clear-all",
+    });
   };
 
   return (
@@ -86,7 +91,7 @@ const Technologies = () => {
         <div className="mb-10 text-center">
           <h2 className="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
             Explore the{" "}
-            <span className="bg-linear-to-r from-orange-500 via-pink-500 to-violet-600 bg-clip-text text-transparent">
+            <span className={BRAND_GRADIENT_TEXT}>
               Technologies
             </span>
           </h2>
@@ -101,14 +106,11 @@ const Technologies = () => {
         {loading ? (
           <div className="flex min-h-60 items-center justify-center">
             <div className="text-center">
-
-              {/* Spinner */}
               <div className="mx-auto h-8 w-8 animate-spin rounded-full border-4 border-slate-200 border-t-pink-500"></div>
 
               <p className="mt-3 text-sm font-medium text-slate-500">
                 Loading technologies...
               </p>
-
             </div>
           </div>
         ) : (
@@ -139,15 +141,6 @@ const Technologies = () => {
           </div>
         )}
       </div>
-
-      {/* React Toastify */}
-      <ToastContainer
-        position="top-right"
-        autoClose={2000}
-        hideProgressBar={false}
-        closeOnClick
-        pauseOnHover
-      />
     </section>
   );
 };
